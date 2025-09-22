@@ -117,15 +117,15 @@ namespace RiwiMusic.Models
                 where client.id == id
                 select client;
 
-            Clients clientToRemove = query.FirstOrDefault();
+            Clients clientRemove = query.FirstOrDefault();
 
-            if (clientToRemove == null)
+            if (clientRemove == null)
             {
                 Console.WriteLine("Cliente no encontrado.");
                 return;
             }
 
-            clientsList.Remove(clientToRemove);
+            clientsList.Remove(clientRemove);
             Console.WriteLine("Cliente eliminado correctamente.");
         }
         // -----------------------------------------------------------------------
