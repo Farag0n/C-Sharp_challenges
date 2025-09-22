@@ -6,8 +6,6 @@ namespace RiwiMusic.Models
 {
     public class Clients
     {
-        public static List<Clients> clientsList = new List<Clients>();
-
         public int id { get; set; }
         public string name { get; set; }
         public int age { get; set; }
@@ -31,10 +29,10 @@ namespace RiwiMusic.Models
         
         // Relación con tickets
         // -------------------------------------------------------------------------------
-        public List<Ticket> ticketsPurchased { get; set; } = new List<Ticket>();
+        public List<Tickets> ticketsPurchased { get; set; } = new List<Tickets>();
         // -------------------------------------------------------------------------------
 
-        //Metodo para egistrar cliente
+        //Metodo para registrar cliente
         // -----------------------------------------------------------------------
         public static void RegisterClient()
         {
