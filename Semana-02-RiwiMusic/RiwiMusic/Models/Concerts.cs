@@ -107,7 +107,7 @@ public class Concerts
                 Console.WriteLine("Ingrese la nueva descripción del concierto:");
                 concert.description = Console.ReadLine();
 
-                Console.WriteLine("Ingrese la nueva fecha (yyyy-MM-dd):");
+                Console.WriteLine("Ingrese la nueva fecha (yyyy/mm/dd):");
                 concert.concertDate = DateOnly.Parse(Console.ReadLine());
 
                 Console.WriteLine("Ingrese el nuevo precio:");
