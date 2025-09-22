@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/faragon/Desktop/C#-Challenges/RiwiMusic/RiwiMusic/RiwiMusic.csproj": {}
+    "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-02-RiwiMusic/RiwiMusic/RiwiMusic.csproj": {}
   },
   "projects": {
-    "/home/faragon/Desktop/C#-Challenges/RiwiMusic/RiwiMusic/RiwiMusic.csproj": {
+    "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-02-RiwiMusic/RiwiMusic/RiwiMusic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/faragon/Desktop/C#-Challenges/RiwiMusic/RiwiMusic/RiwiMusic.csproj",
+        "projectUniqueName": "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-02-RiwiMusic/RiwiMusic/RiwiMusic.csproj",
         "projectName": "RiwiMusic",
-        "projectPath": "/home/faragon/Desktop/C#-Challenges/RiwiMusic/RiwiMusic/RiwiMusic.csproj",
+        "projectPath": "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-02-RiwiMusic/RiwiMusic/RiwiMusic.csproj",
         "packagesPath": "/home/faragon/.nuget/packages/",
-        "outputPath": "/home/faragon/Desktop/C#-Challenges/RiwiMusic/RiwiMusic/obj/",
+        "outputPath": "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-02-RiwiMusic/RiwiMusic/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/faragon/.nuget/NuGet/NuGet.Config"
