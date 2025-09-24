@@ -9,7 +9,7 @@ public class Store
     //Lista en la que se van a guardar todos los productos(ArrayList)
         static List<ArrayList> inventory = new List<ArrayList>();
         
-        /*Carateres para mejorar el estilo del menu de bienvenida
+        /*Caracteres para mejorar el estilo del menu de bienvenida
          con este metodo se piden dos valores un char y la cantidad
          de veces que se va a repetir*/
         static string welcomeStyle1 = new string('=', 83);
@@ -22,7 +22,7 @@ public class Store
         
         //-------------------------------------------------------------------------------------
         //Metodo inicializador
-        public static void openStore()
+        public static void OpenStore()
         {
             //Se crea un ArrayList por cada producto con nombre,precio y cantidad
             ArrayList product1 = new ArrayList() { "alfajor", 2.5, 32 };
@@ -71,7 +71,10 @@ public class Store
         //Metodo para agregar al carrito
         public static void buyProducts()
         {
+            //Variable para el estado del while
             bool status = true;
+            
+            //Variable para almacenar el producto elejido
             string chosenProduct;
             
             while (status)
@@ -91,8 +94,11 @@ public class Store
 
                 //Buscar producto en inventario
                 bool found = false;
+                
+                //Se busca el producto en el inventario
                 foreach (ArrayList product in inventory)
                 {
+                    //Si el producto existe se cambia el estado de la busqueda
                     if (product[0].ToString().ToLower() == chosenProduct)
                     {
                         found = true;
@@ -101,6 +107,8 @@ public class Store
                         int qty = int.Parse(Console.ReadLine());
 
                         int stock = Convert.ToInt32(product[2]);
+                        
+                        //Se valida que la cantidad elegida no supere el stock
                         if (qty <= stock)
                         {
                             //Reducir inventario

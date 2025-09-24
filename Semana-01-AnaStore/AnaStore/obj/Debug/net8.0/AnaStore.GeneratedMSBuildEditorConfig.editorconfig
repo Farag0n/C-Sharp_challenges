@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AnaStore
-build_property.ProjectDir = /home/faragon/Desktop/C#-Challenges/AnaStore/AnaStore/
+build_property.ProjectDir = /home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-01-AnaStore/AnaStore/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

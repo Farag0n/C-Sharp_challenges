@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/faragon/Desktop/C#-Challenges/AnaStore/AnaStore/AnaStore.csproj",
+      "projectUniqueName": "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-01-AnaStore/AnaStore/AnaStore.csproj",
       "projectName": "AnaStore",
-      "projectPath": "/home/faragon/Desktop/C#-Challenges/AnaStore/AnaStore/AnaStore.csproj",
+      "projectPath": "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-01-AnaStore/AnaStore/AnaStore.csproj",
       "packagesPath": "/home/faragon/.nuget/packages/",
-      "outputPath": "/home/faragon/Desktop/C#-Challenges/AnaStore/AnaStore/obj/",
+      "outputPath": "/home/faragon/Desktop/Repos/C-Sharp_challenges/Semana-01-AnaStore/AnaStore/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/faragon/.nuget/NuGet/NuGet.Config"
