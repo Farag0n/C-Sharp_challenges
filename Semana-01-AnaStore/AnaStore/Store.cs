@@ -128,6 +128,7 @@ public class Store
                     }
                 }
 
+                //Si es diferente a lo que se esta buscando advierte al usuario
                 if (!found)
                 {
                     Console.WriteLine("Producto no encontrado, intente nuevamente.");
@@ -140,7 +141,10 @@ public class Store
         //Metodo para calcular el total y aplicar el descuento si aplica
         public static void sumTotal()
         {
+            //Variable para almacenar el total
             double total = 0;
+            
+            //Se itera cada item que este en el carrito
             foreach (ArrayList item in shopingCart)
             {
                 double price = Convert.ToDouble(item[1]);
