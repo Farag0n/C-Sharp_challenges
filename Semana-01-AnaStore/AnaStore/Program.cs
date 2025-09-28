@@ -1,4 +1,5 @@
 ﻿using System;
+using AnaStore;
 
 namespace AnaStore;
 
@@ -6,7 +7,7 @@ namespace AnaStore;
   {
     static void Main(string[] args)
     {
-      
+      Store.OpenStore();
     }
   }
 

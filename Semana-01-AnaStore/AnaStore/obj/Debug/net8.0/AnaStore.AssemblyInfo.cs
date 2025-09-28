@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnaStore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64e06b36f61f60b8896f8900b29e417b93b402bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6df7fded0f0f2b3f012b35117b2569b1f2d4054c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnaStore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnaStore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
