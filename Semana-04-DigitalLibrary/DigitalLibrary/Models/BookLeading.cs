@@ -2,5 +2,18 @@ namespace DigitalLibrary.Models;
 
 public class BookLeading
 {
-    
+    public int ID { get; set; }
+    public int UserId { get; set; }
+    public int BookId { get; set; }
+    public DateOnly ReturnDate { get; set; }
+    public bool ReturnState { get; set; }
+
+    public BookLeading(int id, int userId, int bookId, DateOnly returnDate, bool returnState)
+    {
+        ID = id;
+        UserId = userId;
+        BookId = bookId;
+        ReturnDate = returnDate;
+        ReturnState = returnState;
+    }
 }
