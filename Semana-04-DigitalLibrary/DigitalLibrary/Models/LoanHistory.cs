@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace DigitalLibrary.Models;
 
-public class LendingHistory
+public class LoanHistory
 {
     public int ID { get; set; }
     public int UserId { get; set; }
     public int BookId { get; set; }
     public int BookLendingId { get; set; }
 
-    public LendingHistory(int id, int userId, int bookId, int bLendingId)
+    public LoanHistory(int id, int userId, int bookId, int bLendingId)
     {
         ID = id;
         UserId = userId;
