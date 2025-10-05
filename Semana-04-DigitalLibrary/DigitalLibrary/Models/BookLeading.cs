@@ -7,6 +7,10 @@ public class BookLeading
     public int BookId { get; set; }
     public DateOnly ReturnDate { get; set; }
     public bool ReturnState { get; set; }
+    
+    //Relacines
+    public Book Book { get; set; }
+    public User User { get; set; }
 
     public BookLeading(int id, int userId, int bookId, DateOnly returnDate, bool returnState)
     {
