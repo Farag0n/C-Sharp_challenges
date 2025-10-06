@@ -1,4 +1,15 @@
+using DigitalLibrary.Infraestructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Usa la cadena de coneccion desde appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Registrar el contexto de la base de datos para poder usarlo con facilidad cualquier otro archivo
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+    );
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Index}/{id?}");
 
 app.Run();
