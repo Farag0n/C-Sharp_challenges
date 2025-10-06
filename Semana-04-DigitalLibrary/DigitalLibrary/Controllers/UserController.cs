@@ -20,7 +20,6 @@ namespace DigitalLibrary.Controllers
 
         // ------------------------------------------------------------
         // Index: lista todos los usuarios
-        // Ruta: /User/Index
         // ------------------------------------------------------------
         public IActionResult Index()
         {
@@ -32,8 +31,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // ------------------------------------------------------------
-        // Create (GET): muestra formulario de creación
-        // Ruta: /User/Create
+        // Create : muestra formulario de creación
         // ------------------------------------------------------------
         public IActionResult Create()
         {
@@ -42,10 +40,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // ------------------------------------------------------------
-        // SaveCreate (GET): procesa el formulario de creación
-        // - No usamos [HttpPost]; el formulario hará submit con method="get".
-        // - Recibe los parámetros por la cadena de consulta.
-        // Ruta: /User/SaveCreate?name=...&age=...
+        // SaveCreate: procesa el formulario de creación
         // ------------------------------------------------------------
         public IActionResult SaveCreate(string name, int age = 0, string docNumber = "", string email = "", int celNumber = 0)
         {
@@ -85,8 +80,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // ------------------------------------------------------------
-        // Edit (GET): muestra el formulario de edición para un usuario
-        // Ruta: /User/Edit/{id}
+        // Edit: muestra el formulario de edición para un usuario
         // ------------------------------------------------------------
         public IActionResult Edit(int id)
         {
@@ -102,9 +96,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // ------------------------------------------------------------
-        // SaveEdit (GET): procesa el formulario de edición
-        // - Recibe los campos por query string.
-        // Ruta: /User/SaveEdit?id=1&name=...
+        // SaveEdit: procesa el formulario de edición
         // ------------------------------------------------------------
         public IActionResult SaveEdit(int id, string name, int age = 0, string docNumber = "", string email = "", int celNumber = 0)
         {
@@ -138,8 +130,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // ------------------------------------------------------------
-        // Delete (GET): muestra confirmación de borrado
-        // Ruta: /User/Delete/{id}
+        // Delete: muestra confirmación de borrado
         // ------------------------------------------------------------
         public IActionResult Delete(int id)
         {
@@ -153,8 +144,6 @@ namespace DigitalLibrary.Controllers
 
         // ------------------------------------------------------------
         // ConfirmDelete (GET): elimina el usuario
-        // - No usamos [HttpPost]; se confirma por un enlace o form method="get".
-        // Ruta: /User/ConfirmDelete/{id}
         // ------------------------------------------------------------
         public IActionResult ConfirmDelete(int id)
         {

@@ -1,0 +1,12 @@
+@model DigitalLibrary.Models.Book
+@{
+    ViewData["Title"] = "Eliminar libro";
+    Layout = "_Layout";
+}
+
+<h1>Eliminar usuario</h1>
+
+<p>¿Estás seguro que deseas eliminar el libro <strong>@Model.Name</strong> (ID: @Model.ID)?</p>
+
+<a class="btn btn-danger" href="@Url.Action("ConfirmDelete","Book", new { id = Model.ID })">Sí, eliminar</a>
+<a class="btn btn-secondary" href="@Url.Action("Index","Book")">Cancelar</a>
