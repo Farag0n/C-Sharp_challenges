@@ -4,28 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ------------------------------------------------------------
-// Cargar la cadena de conexión desde appsettings.json
-// ------------------------------------------------------------
+//Usa la cadena de conexion de las variables de entorno
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// ------------------------------------------------------------
-// Registrar AppDbContext usando MySQL
-// - No se cambió la estructura de AppDbContext (la dejamos igual)
-// - ServerVersion.AutoDetect hará match con la versión de MySQL
-// ------------------------------------------------------------
+// Se le dice a EF que va a usar mysql y que auto detectete la version 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
-// Registrar MVC (Controllers + Views)
+// Registrar MVC para que Ef pueda usarlo
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
-// ------------------------------------------------------------
-// Pipeline básico (middleware)
-// ------------------------------------------------------------
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -39,7 +29,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Ruta por defecto: abrimos la app en User/Index (tu requerimiento)
+// Ruta por defecto cuando se inicie la app
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=User}/{action=Index}/{id?}"

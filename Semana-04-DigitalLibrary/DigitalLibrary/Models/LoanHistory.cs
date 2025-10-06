@@ -11,6 +11,7 @@ public class LoanHistory
     public BookLeading BookLeading { get; set; }
     
     //Constructor vacio
+    //Si no existe el constructor vacío, EF no puede instanciar la clase y saldra un error
     public LoanHistory(){}
     
     public LoanHistory(int id, int bLendingId)

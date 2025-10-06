@@ -7,7 +7,7 @@ using System.Linq;
 namespace DigitalLibrary.Controllers;
 public class UserController : Controller
 {
-    // Se guarda el contexto para acceder a la base de datos
+    //Guarda el contexto para acceder a la base de datos
     private readonly AppDbContext _context;
 
     // Inyección de dependencias: AppDbContext proviene de Program.cs
@@ -85,7 +85,7 @@ public class UserController : Controller
         var user = _context.Users.Find(id);
         if (user == null)
         {
-            // Si no existe, redirigimos al index
+            // Si no existe, redirije al index
             return RedirectToAction("Index");
         }
 

@@ -9,6 +9,7 @@ public class Book
     public int Stock { get; set; }
 
     //Constructor vacio
+    //Si no existe el constructor vacío, EF no puede instanciar la clase y saldra un error
     public Book(){}
     
     public Book(int id, string name, string? writer, DateOnly relased, int stock)

@@ -13,6 +13,7 @@ public class BookLeading
     public User User { get; set; }
     
     //Constructor vacio
+    //Si no existe el constructor vacío, EF no puede instanciar la clase y saldra un error
     public BookLeading(){}
 
     public BookLeading(int id, int userId, int bookId, DateOnly returnDate, bool returnState)

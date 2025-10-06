@@ -10,6 +10,7 @@ public abstract class Person
     public int CelNumber { get; set; }
     
     //Constructor vacio
+    //Si no existe el constructor vacío, EF no puede instanciar la clase y saldra un error
     public Person(){}
 
     public Person(int id, string name, int age, string docNumber, string email, int celNumber)
