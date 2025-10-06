@@ -141,7 +141,7 @@ public class UserController : Controller
     }
 
     // ------------------------------------------------------------
-    // ConfirmDelete (GET): elimina el usuario
+    // ConfirmDelete: elimina el usuario
     // ------------------------------------------------------------
     public IActionResult ConfirmDelete(int id)
     {
