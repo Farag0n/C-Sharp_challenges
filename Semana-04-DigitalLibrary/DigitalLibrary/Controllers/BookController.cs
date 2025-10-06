@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using DigitalLibrary.Models;
 using DigitalLibrary.Infraestructure;
-using System;
 using System.Linq;
 
 namespace DigitalLibrary.Controllers;
@@ -17,6 +16,7 @@ public class BookController : Controller
         _context = context;
     }
 
+    
     // Lista de todos los libros
     // ------------------------------------------------------------
     public IActionResult Index()

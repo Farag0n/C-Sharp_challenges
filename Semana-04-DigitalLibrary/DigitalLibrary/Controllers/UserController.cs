@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using DigitalLibrary.Models;
 using DigitalLibrary.Infraestructure;
-using System;
 using System.Linq;
 
 namespace DigitalLibrary.Controllers;
@@ -39,7 +38,7 @@ public class UserController : Controller
     {
         try
         {
-            // Validaciones básicas
+            // Validar que el nombre no este basico
             if (string.IsNullOrWhiteSpace(name))
             {
                 ViewBag.Error = "El nombre es obligatorio.";
