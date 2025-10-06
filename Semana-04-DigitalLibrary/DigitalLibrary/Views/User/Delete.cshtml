@@ -1,20 +1,12 @@
 @model DigitalLibrary.Models.User
+@{
+    ViewData["Title"] = "Eliminar usuario";
+    Layout = "_Layout";
+}
 
-<h2>Eliminar Usuario</h2>
+<h1>Eliminar usuario</h1>
 
-<div>
-    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
-    <dl class="row">
-        <dt class="col-sm-2">Nombre:</dt>
-        <dd class="col-sm-10">@Model.Name</dd>
+<p>¿Estás seguro que deseas eliminar al usuario <strong>@Model.Name</strong> (ID: @Model.ID)?</p>
 
-        <dt class="col-sm-2">Documento:</dt>
-        <dd class="col-sm-10">@Model.DocNumber</dd>
-    </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ID" />
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
-    </form>
-</div>
+<a class="btn btn-danger" href="@Url.Action("ConfirmDelete","User", new { id = Model.ID })">Sí, eliminar</a>
+<a class="btn btn-secondary" href="@Url.Action("Index","User")">Cancelar</a>

@@ -1,31 +1,40 @@
 @model DigitalLibrary.Models.User
+@{
+    ViewData["Title"] = "Editar usuario";
+    Layout = "_Layout";
+}
 
-<h2>Editar Usuario</h2>
+<h1>Editar usuario</h1>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="ID" />
-    <div class="form-group">
-        <label>Nombre</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+@if(ViewBag.Error != null) {
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="get" action="@Url.Action("SaveEdit","User")">
+    <!-- incluimos el id en los parámetros -->
+    <input type="hidden" name="id" value="@Model.ID" />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input name="name" class="form-control" value="@Model.Name" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Edad</label>
+        <input name="age" type="number" class="form-control" value="@Model.Age" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Número de documento</label>
+        <input name="docNumber" class="form-control" value="@Model.DocNumber" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input name="email" type="email" class="form-control" value="@Model.Email" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Celular</label>
+        <input name="celNumber" type="number" class="form-control" value="@Model.CelNumber" />
     </div>
 
-    <div class="form-group">
-        <label>Documento</label>
-        <input asp-for="DocNumber" class="form-control" />
-        <span asp-validation-for="DocNumber" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label>Correo</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label>Teléfono</label>
-        <input asp-for="CelNumber" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-success">Guardar Cambios</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Volver</a>
+    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index","User")">Cancelar</a>
 </form>

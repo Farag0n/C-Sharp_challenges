@@ -1,32 +1,50 @@
 @model IEnumerable<DigitalLibrary.Models.User>
+@{
+    ViewData["Title"] = "Lista de usuarios";
+    Layout = "_Layout";
+}
 
-<h2>Usuarios Registrados</h2>
+<h1>Lista de usuarios</h1>
 
 <p>
-    <a href="@Url.Action("Create", "User")" class="btn btn-primary">+ Nuevo Usuario</a>
+    <!-- Enviar a la vista Create (formulario) -->
+    <a class="btn btn-primary" href="@Url.Action("Create", "User")">Crear usuario</a>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Book")">Ver libros</a>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Book")">Ver libros</a>
+
 </p>
+
+@if(ViewBag.Error != null) {
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
 
 <table class="table table-striped">
     <thead>
     <tr>
+        <th>Id</th>
         <th>Nombre</th>
+        <th>Edad</th>
         <th>Documento</th>
-        <th>Correo</th>
-        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Celular</th>
+        <th>Fecha registro</th>
         <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var user in Model)
     {
         <tr>
-            <td>@item.Name</td>
-            <td>@item.DocNumber</td>
-            <td>@item.Email</td>
-            <td>@item.CelNumber</td>
+            <td>@user.ID</td>
+            <td>@user.Name</td>
+            <td>@user.Age</td>
+            <td>@user.DocNumber</td>
+            <td>@user.Email</td>
+            <td>@user.CelNumber</td>
+            <td>@user.RegistrationDate.ToString("yyyy-MM-dd")</td>
             <td>
-                <a href="@Url.Action("Edit", "User", new { id = item.ID })" class="btn btn-warning btn-sm">Editar</a>
-                <a href="@Url.Action("Delete", "User", new { id = item.ID })" class="btn btn-danger btn-sm">Eliminar</a>
+                <a class="btn btn-sm btn-secondary" href="@Url.Action("Edit", "User", new { id = user.ID })">Editar</a>
+                <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "User", new { id = user.ID })">Eliminar</a>
             </td>
         </tr>
     }

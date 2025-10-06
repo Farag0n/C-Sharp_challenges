@@ -1,128 +1,161 @@
+// Controllers/UserController.cs
 using Microsoft.AspNetCore.Mvc;
 using DigitalLibrary.Models;
 using DigitalLibrary.Infraestructure;
+using System;
 using System.Linq;
 
 namespace DigitalLibrary.Controllers
 {
     public class UserController : Controller
     {
+        // Se guarda el contexto para acceder a la base de datos
         private readonly AppDbContext _context;
 
+        // Inyección de dependencias: AppDbContext proviene de Program.cs
         public UserController(AppDbContext context)
         {
             _context = context;
         }
 
-        // Mostrar todos los usuarios
+        // ------------------------------------------------------------
+        // Index: lista todos los usuarios
+        // Ruta: /User/Index
+        // ------------------------------------------------------------
         public IActionResult Index()
         {
+            // Obtenemos todos los usuarios de la base de datos
             var users = _context.Users.ToList();
+
+            // Pasamos la lista a la vista
             return View(users);
         }
 
-        // Formulario para crear usuario
+        // ------------------------------------------------------------
+        // Create (GET): muestra formulario de creación
+        // Ruta: /User/Create
+        // ------------------------------------------------------------
         public IActionResult Create()
         {
+            // Solo retornar la vista del formulario
             return View();
         }
 
-        // Acción para guardar usuario (sin atributos [HttpPost])
-        public IActionResult SaveNew()
+        // ------------------------------------------------------------
+        // SaveCreate (GET): procesa el formulario de creación
+        // - No usamos [HttpPost]; el formulario hará submit con method="get".
+        // - Recibe los parámetros por la cadena de consulta.
+        // Ruta: /User/SaveCreate?name=...&age=...
+        // ------------------------------------------------------------
+        public IActionResult SaveCreate(string name, int age = 0, string docNumber = "", string email = "", int celNumber = 0)
         {
             try
             {
-                // Obtener los datos manualmente desde el formulario
-                var id = int.Parse(Request.Form["Id"]);
-                var name = Request.Form["Name"];
-                var age = int.Parse(Request.Form["Age"]);
-                var docNumber = Request.Form["DocNumber"];
-                var email = Request.Form["Email"];
-                var celNumber = int.Parse(Request.Form["CelNumber"]);
-
-                // Validar documento duplicado
-                if (_context.Users.Any(u => u.DocNumber == docNumber))
+                // Validaciones básicas
+                if (string.IsNullOrWhiteSpace(name))
                 {
-                    ViewBag.Error = "El documento ya está registrado.";
+                    ViewBag.Error = "El nombre es obligatorio.";
                     return View("Create");
                 }
 
-                var registrationDate = DateOnly.FromDateTime(DateTime.Now);
-                var user = new User(id, name, age, docNumber, email, celNumber, registrationDate);
+                // Crear objeto user
+                var user = new User
+                {
+                    Name = name,
+                    Age = age,
+                    DocNumber = docNumber,
+                    Email = email,
+                    CelNumber = celNumber,
+                    RegistrationDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+                };
 
+                // Guardar en la base de datos
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
+                // Redirigir al índice
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                ViewBag.Error = "Error al registrar el usuario. Verifique los datos.";
+                // En caso de error, mostrar mensaje en la vista de creación
+                ViewBag.Error = "Error guardando el usuario: " + ex.Message;
                 return View("Create");
             }
         }
 
-        // Formulario para editar
+        // ------------------------------------------------------------
+        // Edit (GET): muestra el formulario de edición para un usuario
+        // Ruta: /User/Edit/{id}
+        // ------------------------------------------------------------
         public IActionResult Edit(int id)
         {
             var user = _context.Users.Find(id);
             if (user == null)
-                return NotFound();
+            {
+                // Si no existe, redirigimos al index
+                return RedirectToAction("Index");
+            }
 
+            // Enviamos el user a la vista Edit
             return View(user);
         }
 
-        // Guardar cambios de edición (sin [HttpPost])
-        public IActionResult SaveEdit(int id)
+        // ------------------------------------------------------------
+        // SaveEdit (GET): procesa el formulario de edición
+        // - Recibe los campos por query string.
+        // Ruta: /User/SaveEdit?id=1&name=...
+        // ------------------------------------------------------------
+        public IActionResult SaveEdit(int id, string name, int age = 0, string docNumber = "", string email = "", int celNumber = 0)
         {
-            var user = _context.Users.Find(id);
-            if (user == null)
-                return NotFound();
-
             try
             {
-                var name = Request.Form["Name"];
-                var age = int.Parse(Request.Form["Age"]);
-                var docNumber = Request.Form["DocNumber"];
-                var email = Request.Form["Email"];
-                var celNumber = int.Parse(Request.Form["CelNumber"]);
-
-                if (_context.Users.Any(u => u.DocNumber == docNumber && u.ID != id))
+                var user = _context.Users.Find(id);
+                if (user == null)
                 {
-                    ViewBag.Error = "Ya existe otro usuario con ese documento.";
-                    return View("Edit", user);
+                    ViewBag.Error = "Usuario no encontrado.";
+                    return RedirectToAction("Index");
                 }
 
-                // Actualizar manualmente
+                // Actualizar manualmente los campos permitidos
                 user.Name = name;
                 user.Age = age;
                 user.DocNumber = docNumber;
                 user.Email = email;
                 user.CelNumber = celNumber;
 
+                // Guardar cambios
                 _context.Users.Update(user);
                 _context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                ViewBag.Error = "Error al editar el usuario.";
-                return View("Edit", user);
+                ViewBag.Error = "Error editando el usuario: " + ex.Message;
+                return RedirectToAction("Index");
             }
         }
 
-        // Confirmación de eliminación
+        // ------------------------------------------------------------
+        // Delete (GET): muestra confirmación de borrado
+        // Ruta: /User/Delete/{id}
+        // ------------------------------------------------------------
         public IActionResult Delete(int id)
         {
             var user = _context.Users.Find(id);
             if (user == null)
-                return NotFound();
-
+            {
+                return RedirectToAction("Index");
+            }
             return View(user);
         }
 
-        // Acción de eliminar (sin [HttpPost])
+        // ------------------------------------------------------------
+        // ConfirmDelete (GET): elimina el usuario
+        // - No usamos [HttpPost]; se confirma por un enlace o form method="get".
+        // Ruta: /User/ConfirmDelete/{id}
+        // ------------------------------------------------------------
         public IActionResult ConfirmDelete(int id)
         {
             var user = _context.Users.Find(id);

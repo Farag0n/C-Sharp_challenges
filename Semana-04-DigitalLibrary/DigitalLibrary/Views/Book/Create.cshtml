@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Crear libro";
+    Layout = "_Layout";
+}
+
+<h1>Crear libro</h1>
+
+@if(ViewBag.Error != null) {
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="get" action="@Url.Action("SaveCreate","Book")">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input name="name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Autor</label>
+        <input name="writer" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha de publicación (YYYY-MM-DD)</label>
+        <input name="relased" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Stock</label>
+        <input name="stock" type="number" class="form-control" value="1" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Guardar</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index","Book")">Cancelar</a>
+</form>
