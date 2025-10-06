@@ -10,25 +10,22 @@ public class UserController : Controller
     //Guarda el contexto para acceder a la base de datos
     private readonly AppDbContext _context;
 
-    // Inyección de dependencias: AppDbContext proviene de Program.cs
+    // Inyección de dependencias (para que el controlador pueda interacturar con EF
     public UserController(AppDbContext context)
     {
         _context = context;
     }
 
-    // ------------------------------------------------------------
-    // Index: lista todos los usuarios
+    
+    // Index: lista de usuarios
     // ------------------------------------------------------------
     public IActionResult Index()
     {
-        // Obtenemos todos los usuarios de la base de datos
         var users = _context.Users.ToList();
-
-        // Pasamos la lista a la vista
         return View(users);
     }
 
-    // ------------------------------------------------------------
+    
     // Create : muestra formulario de creación
     // ------------------------------------------------------------
     public IActionResult Create()
@@ -36,10 +33,8 @@ public class UserController : Controller
         // Solo retornar la vista del formulario
         return View();
     }
-
-    // ------------------------------------------------------------
-    // SaveCreate: procesa el formulario de creación
-    // ------------------------------------------------------------
+    
+    // SaveCreate procesa y guarda el formulario de creación
     public IActionResult SaveCreate(string name, int age = 0, string docNumber = "", string email = "", int celNumber = 0)
     {
         try
@@ -66,36 +61,32 @@ public class UserController : Controller
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            // Redirigir al índice
+            //Volver al Index
             return RedirectToAction("Index");
         }
         catch (Exception ex)
         {
-            // En caso de error, mostrar mensaje en la vista de creación
             ViewBag.Error = "Error guardando el usuario: " + ex.Message;
             return View("Create");
         }
     }
-
     // ------------------------------------------------------------
-    // Edit: muestra el formulario de edición para un usuario
+
+    
+    // Edit: muestra el formulario de editar usuario
     // ------------------------------------------------------------
     public IActionResult Edit(int id)
     {
         var user = _context.Users.Find(id);
         if (user == null)
         {
-            // Si no existe, redirije al index
             return RedirectToAction("Index");
         }
-
-        // Enviamos el user a la vista Edit
+        
         return View(user);
     }
-
-    // ------------------------------------------------------------
+    
     // SaveEdit: procesa el formulario de edición
-    // ------------------------------------------------------------
     public IActionResult SaveEdit(int id, string name, int age = 0, string docNumber = "", string email = "", int celNumber = 0)
     {
         try
@@ -126,9 +117,10 @@ public class UserController : Controller
             return RedirectToAction("Index");
         }
     }
-
     // ------------------------------------------------------------
-    // Delete: muestra confirmación de borrado
+
+    
+    // Delete se muestra la vista
     // ------------------------------------------------------------
     public IActionResult Delete(int id)
     {
@@ -139,10 +131,8 @@ public class UserController : Controller
         }
         return View(user);
     }
-
-    // ------------------------------------------------------------
-    // ConfirmDelete: elimina el usuario
-    // ------------------------------------------------------------
+    
+    // ConfirmDelete
     public IActionResult ConfirmDelete(int id)
     {
         var user = _context.Users.Find(id);
@@ -153,5 +143,6 @@ public class UserController : Controller
         }
         return RedirectToAction("Index");
     }
+    // ------------------------------------------------------------
 }
 

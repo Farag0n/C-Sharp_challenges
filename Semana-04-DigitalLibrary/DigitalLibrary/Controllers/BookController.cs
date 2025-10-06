@@ -8,14 +8,17 @@ namespace DigitalLibrary.Controllers;
 
 public class BookController : Controller
 {
+    //Guarda el contexto para acceder a la base de datos
     private readonly AppDbContext _context;
 
+    // Inyección de dependencias (para que el controlador pueda interacturar con EF
     public BookController(AppDbContext context)
     {
         _context = context;
     }
 
-    // Lista todos los libros
+    // Lista de todos los libros
+    // ------------------------------------------------------------
     public IActionResult Index()
     {
         var books = _context.Books.ToList();
@@ -23,13 +26,14 @@ public class BookController : Controller
     }
 
     // Mostrar formulario de creación
+    // ------------------------------------------------------------
     public IActionResult Create()
     {
         return View();
     }
-
-    // Procesar creación vía query string
-    public IActionResult SaveCreate(string name, string writer = "", string relased = "", int stock = 0)
+    
+    // Guarda y procesa el formulario
+    public IActionResult SaveCreate(string name, string writer,DateOnly relased, int stock = 0)
     {
         try
         {
@@ -39,18 +43,12 @@ public class BookController : Controller
                 return View("Create");
             }
 
-            // Intentar parsear fecha; si no, usar la fecha de hoy
-            DateOnly releaseDate;
-            if (!DateOnly.TryParse(relased, out releaseDate))
-            {
-                releaseDate = DateOnly.FromDateTime(DateTime.Now);
-            }
-
+            
             var book = new Book
             {
                 Name = name,
-                Writer = string.IsNullOrWhiteSpace(writer) ? null : writer,
-                Relased = releaseDate,
+                Writer = writer,
+                Relased = relased,
                 Stock = stock
             };
 
@@ -65,34 +63,40 @@ public class BookController : Controller
             return View("Create");
         }
     }
+    // ------------------------------------------------------------
 
-    // Edit (GET)
+    
+    // Edit muestra el formulario de edicion 
+    // ------------------------------------------------------------
     public IActionResult Edit(int id)
     {
         var book = _context.Books.Find(id);
-        if (book == null) return RedirectToAction("Index");
+        if (book == null)
+        {
+            return RedirectToAction("Index");
+        }
         return View(book);
     }
-
-    // SaveEdit (GET)
-    public IActionResult SaveEdit(int id, string name, string writer = "", string relased = "", int stock = 0)
+    
+    // SaveEdit
+    public IActionResult SaveEdit(int id, string name, string writer,DateOnly relased, int stock = 0)
     {
         try
         {
             var book = _context.Books.Find(id);
-            if (book == null) return RedirectToAction("Index");
-
-            book.Name = name;
-            book.Writer = string.IsNullOrWhiteSpace(writer) ? null : writer;
-
-            DateOnly releaseDate;
-            if (!DateOnly.TryParse(relased, out releaseDate))
+            if (book == null)
             {
-                releaseDate = book.Relased;
+                ViewBag.Error = "El libro no existe";
+                return RedirectToAction("Index");
             }
-            book.Relased = releaseDate;
+            
+            //Actualizar manualmente los campos
+            book.Name = name;
+            book.Writer = writer;
+            book.Relased = relased;
             book.Stock = stock;
-
+            
+            //Guardar cambios
             _context.Books.Update(book);
             _context.SaveChanges();
 
@@ -104,16 +108,21 @@ public class BookController : Controller
             return RedirectToAction("Index");
         }
     }
+    // ------------------------------------------------------------
 
-    // Delete (GET)
+    // Delete se muestra la vista
+    // ------------------------------------------------------------
     public IActionResult Delete(int id)
     {
         var book = _context.Books.Find(id);
-        if (book == null) return RedirectToAction("Index");
+        if (book == null)
+        {
+            return RedirectToAction("Index");
+        }
         return View(book);
     }
 
-    // ConfirmDelete (GET)
+    // ConfirmDelete
     public IActionResult ConfirmDelete(int id)
     {
         var book = _context.Books.Find(id);
@@ -124,5 +133,6 @@ public class BookController : Controller
         }
         return RedirectToAction("Index");
     }
+    // ------------------------------------------------------------
 }
 
