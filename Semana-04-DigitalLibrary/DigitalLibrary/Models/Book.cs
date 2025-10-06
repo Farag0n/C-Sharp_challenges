@@ -8,6 +8,9 @@ public class Book
     public DateOnly Relased{ get; set; }
     public int Stock { get; set; }
 
+    //Constructor vacio
+    public Book(){}
+    
     public Book(int id, string name, string? writer, DateOnly relased, int stock)
     {
         ID = id;

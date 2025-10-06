@@ -11,6 +11,9 @@ public class BookLeading
     //Relacines
     public Book Book { get; set; }
     public User User { get; set; }
+    
+    //Constructor vacio
+    public BookLeading(){}
 
     public BookLeading(int id, int userId, int bookId, DateOnly returnDate, bool returnState)
     {

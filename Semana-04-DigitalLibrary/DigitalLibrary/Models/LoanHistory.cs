@@ -9,6 +9,10 @@ public class LoanHistory
 
     //Relaciones
     public BookLeading BookLeading { get; set; }
+    
+    //Constructor vacio
+    public LoanHistory(){}
+    
     public LoanHistory(int id, int bLendingId)
     {
         ID = id;

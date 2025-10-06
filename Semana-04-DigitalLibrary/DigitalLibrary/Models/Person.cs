@@ -8,6 +8,9 @@ public abstract class Person
     public string DocNumber { get; set; }
     public string Email { get; set; }
     public int CelNumber { get; set; }
+    
+    //Constructor vacio
+    public Person(){}
 
     public Person(int id, string name, int age, string docNumber, string email, int celNumber)
     {
